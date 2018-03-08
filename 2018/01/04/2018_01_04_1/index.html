@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="遍历dict实例：请用 for 循环遍历如下的dict，打印出 name: score 来。 1234567d = &amp;#123;    &amp;apos;Adam&amp;apos;: 95,    &amp;apos;Lisa&amp;apos;: 85,    &amp;apos;Bart&amp;apos;: 59&amp;#125;for key in d:    print key + &amp;apos;:&amp;apos; + str(d[key]">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python_mocco入门笔记（三）">
+<meta property="og:url" content="https://joeychan0813.github.io/2018/01/04/2018_01_04_1/index.html">
+<meta property="og:site_name" content="JoeyChan">
+<meta property="og:description" content="遍历dict实例：请用 for 循环遍历如下的dict，打印出 name: score 来。 1234567d = &amp;#123;    &amp;apos;Adam&amp;apos;: 95,    &amp;apos;Lisa&amp;apos;: 85,    &amp;apos;Bart&amp;apos;: 59&amp;#125;for key in d:    print key + &amp;apos;:&amp;apos; + str(d[key]">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-04T11:31:03.584Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python_mocco入门笔记（三）">
+<meta name="twitter:description" content="遍历dict实例：请用 for 循环遍历如下的dict，打印出 name: score 来。 1234567d = &amp;#123;    &amp;apos;Adam&amp;apos;: 95,    &amp;apos;Lisa&amp;apos;: 85,    &amp;apos;Bart&amp;apos;: 59&amp;#125;for key in d:    print key + &amp;apos;:&amp;apos; + str(d[key]">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://joeychan0813.github.io/2018/01/04/2018_01_04_1/"/>
+
+
+
+
+
+  <title>Python_mocco入门笔记（三） | JoeyChan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JoeyChan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My favorate faded fantacy.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://joeychan0813.github.io/2018/01/04/2018_01_04_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JoeyChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoeyChan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python_mocco入门笔记（三）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T00:00:00+08:00">
+                2018-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,556 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>遍历dict<strong>实例</strong>：请用 for 循环遍历如下的dict，打印出 name: score 来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d = &#123;</span><br><span class="line">    &apos;Adam&apos;: 95,</span><br><span class="line">    &apos;Lisa&apos;: 85,</span><br><span class="line">    &apos;Bart&apos;: 59</span><br><span class="line">&#125;</span><br><span class="line">for key in d:</span><br><span class="line">    print key + &apos;:&apos; + str(d[key])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>set</strong>的用处：有时候我们不想要key与value的对应关系，只想要dict的key，不关心value，目的只是让集合不要重复。它<strong>无序且不重复</strong>。<br><code>s = set([&#39;A&#39;, &#39;B&#39;, &#39;C&#39;])</code><br>查看set的内容：<br><code>print s</code><br><code>set([&#39;A&#39;, &#39;C&#39;, &#39;B&#39;])</code><br>当出现重复元素时，会<strong>自动滤去</strong>。<br>由于set存储的是无序集合，所以我们<strong>没法通过索引来访问</strong>。</p>
+</li>
+<li>set的特点：set的内部结构和dict很像，<strong>1）</strong>唯一区别是不存储value。set存储的元素和dict的key类似，<strong>2）</strong>必须是不变对象。set存储的元素也是<strong>3）</strong>没有顺序的。</li>
+<li>遍历set的<strong>实例：</strong>请用 for 循环遍历如下的set，打印出 name: score 来。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s = set([(&apos;Adam&apos;, 95), (&apos;Lisa&apos;, 85), (&apos;Bart&apos;, 59)])</span><br><span class="line">for x in s: //for name,score in s:</span><br><span class="line">    print x[0] + &apos;:&apos; + str(x[1]) // print name,&apos;:&apos;,score</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>本题可看作是<strong>set与tuple的结合</strong>。</p>
+<ul>
+<li><p>更新set：包括添加与删除。<br>添加：用<strong>s.add()</strong>方法；删除：用<strong>s.remove()</strong>方法，删除前最好判断，否则容易报错。<br><strong>实例：</strong>针对下面的set，给定一个list，对list中的每一个元素，如果在set中，就将其删除，如果不在set中，就添加进去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">s = set([&apos;Adam&apos;, &apos;Lisa&apos;, &apos;Paul&apos;])</span><br><span class="line">L = [&apos;Adam&apos;, &apos;Lisa&apos;, &apos;Bart&apos;, &apos;Paul&apos;]</span><br><span class="line">for name in L:</span><br><span class="line">    if name in s:</span><br><span class="line">        s.remove(name)</span><br><span class="line">        print s</span><br><span class="line">    else:</span><br><span class="line">        s.add(name)</span><br><span class="line">        print s</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>简单函数<strong>实例：</strong>sum()函数接受一个list作为参数，并返回list所有元素之和。请计算 1 <em> 1 + 2 </em> 2 + 3 <em> 3 + … + 100 </em> 100。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L = []</span><br><span class="line">for i in range(1,101):</span><br><span class="line">    L.append(i**2)</span><br><span class="line">print sum(L)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>def定义函数：依次写出函数名、括号、括号中的参数和冒号，然后，在缩进块中编写函数体，函数的返回值用 return 语句返回。注：如果没有return语句，函数执行完毕后也会返回结果，只是结果为 None，return None可以简写为return。<br><strong>实例：</strong>请定义一个 square_of_sum 函数，它接受一个list，返回list中每个元素平方的和。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def square_of_sum(L):</span><br><span class="line">    sum = 0                        |</span><br><span class="line">    for i in L:                     &#125; //return sum(num*num for num in L)</span><br><span class="line">        sum = sum + i**2           |</span><br><span class="line">    return sum                     |</span><br><span class="line">print square_of_sum([1, 2, 3, 4, 5])</span><br><span class="line">print square_of_sum([-5, 0, 5, 15, 25])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数返回多值：实质是返回一个tuple。<br><strong>实例：</strong>一元二次方程的定义是：ax² + bx + c = 0，请编写一个函数，返回一元二次方程的两个解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import math</span><br><span class="line">def quadratic_equation(a, b, c):</span><br><span class="line">    x = b * b - 4 * a * c</span><br><span class="line">    if x &lt; 0:</span><br><span class="line">        return</span><br><span class="line">    elif x == 0:</span><br><span class="line">        return -b / (2 * a)</span><br><span class="line">    else:</span><br><span class="line">        return (math.sqrt(x) - b ) / (2 * a) , (-math.sqrt(x) - b ) / (2 * a)</span><br><span class="line">print quadratic_equation(2, 3, 0)</span><br><span class="line">print quadratic_equation(1, -6, 5)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>递归函数：一个函数在函数体内调用自身，理论上，所有的递归函数都可以写成循环的方式，但<strong>循环的逻辑不如递归清晰</strong>。使用递归函数需要<strong>注意防止栈溢出</strong>。在计算机中，函数调用是通过栈（stack）这种数据结构实现的，每当进入一个函数调用，栈就会加一层栈帧，每当函数返回，栈就会减一层栈帧。由于栈的大小不是无限的，所以，递归调用的次数过多，会导致栈溢出。<br><strong>实例：</strong>汉诺塔 (<a href="http://baike.baidu.com/view/191666.htm" target="_blank" rel="noopener">http://baike.baidu.com/view/191666.htm</a>) 的移动也可以看做是递归函数。我们对柱子编号为a, b, c，将所有圆盘从a移到c可以描述为：如果a只有一个圆盘，可以直接移动到c；如果a有N个圆盘，可以看成a有1个圆盘（底盘） + (N-1)个圆盘，首先需要把 (N-1) 个圆盘移动到 b，然后，将 a的最后一个圆盘移动到c，再将b的(N-1)个圆盘移动到c。请编写一个函数，给定输入 n, a, b, c，打印出移动的步骤：move(n, a, b, c)例如，输入 move(2, ‘A’, ‘B’, ‘C’)，打印出：A –&gt; B  A –&gt; C  B –&gt; C</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line"># move(n, a, b, c)表示的是有n个盘子在a柱子上，将要移到b柱子上面去</span><br><span class="line">def move(n, a, b, c):</span><br><span class="line"># 如果a柱子上面只有一个盘子，则直接移到c柱子上面去并输出路径，结束递归</span><br><span class="line">    if n == 1:  </span><br><span class="line">        print a, &apos;--&gt;&apos;, c</span><br><span class="line">        return</span><br><span class="line"># 表示的是将n-1的盘子从a柱子上面移到b柱子上面去</span><br><span class="line">    move(n-1, a, c, b)</span><br><span class="line"># 输出最下面个盘子移从a移到c的路径</span><br><span class="line">    print a, &apos;--&gt;&apos;, c</span><br><span class="line"># 将b柱子上面的n-1个盘子移动到c柱子上面</span><br><span class="line">    move(n-1, b, a, c)</span><br><span class="line">move(4, &apos;A&apos;, &apos;B&apos;, &apos;C&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>默认参数：例如Python自带的 int() 函数，其实就有两个参数，我们既可以传一个参数，又可以传两个参数：第二个参数是<strong>转换进制</strong>，如果不传，默认是十进制 (base=10)，如果传了，就用传入的参数。<strong>函数的默认参数的作用是简化调用</strong>，但是在需要的时候，又可以传入额外的参数来覆盖默认参数值。由于函数的参数按从左到右的顺序匹配，所以默认参数只能定义在必需参数的后面。（默认参数，传入是就修改默认值，未传入时，就使用原来的值，类似：(a, b=1, c=2)）<br><strong>实例：</strong>请定义一个 greet() 函数，它包含一个默认参数，如果没有传入，打印 ‘Hello, world.’，如果传入，打印 ‘Hello, xxx.’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">def greet(a=&apos;world&apos;):</span><br><span class="line">    print &apos;hello,&apos; + a + &apos;.&apos;</span><br><span class="line">greet()</span><br><span class="line">greet(&apos;Bart&apos;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义可变参数：可变参数的名字前面有个“星号”，我们可以传入0个、1个或多个参数给可变参数。Python解释器会把传入的一组参数组装成一个tuple传递给可变参数，因此，在函数内部，直接把变量 args 看成一个 tuple 就好了。<br><strong>实例：</strong>请编写接受可变参数的 average() 函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def average(*args):</span><br><span class="line">    if args:</span><br><span class="line">        return sum(args)*1.0/len(args)</span><br><span class="line">    else:</span><br><span class="line">        return 0.0</span><br><span class="line">print average()</span><br><span class="line">print average(1, 2)</span><br><span class="line">print average(1, 2, 2, 3, 4)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/29/2017_12_29/" rel="next" title="Python_mocco入门笔记（二）">
+                <i class="fa fa-chevron-left"></i> Python_mocco入门笔记（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/04/2018_01_04_2/" rel="prev" title="Python_mocco入门笔记（四）">
+                Python_mocco入门笔记（四） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjcwNy85MjY4"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JoeyChan" />
+            
+              <p class="site-author-name" itemprop="name">JoeyChan</p>
+              <p class="site-description motion-element" itemprop="description">Life with beauty.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22605222&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JoeyChan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#面向对象编程  面向对象的编程：是一种程序设计范式，把程序看作各种对象间的相互调用，对现实世界建立对象模型。 基本思想：类（class）和实例，1）类用于定义抽象类型；2）实例是根据类的定义被创建出来的。 数据封装：同一个类中的实例拥有相同的数据类型和不同的属性。 class：按照 Python 的编程习惯，类名以大写字母开头，紧接着是(object)，表示该类是从哪个类继承下来的。实例：请练习">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python_mocco进阶笔记（三）">
+<meta property="og:url" content="https://joeychan0813.github.io/2018/02/14/2018_02_14/index.html">
+<meta property="og:site_name" content="JoeyChan">
+<meta property="og:description" content="#面向对象编程  面向对象的编程：是一种程序设计范式，把程序看作各种对象间的相互调用，对现实世界建立对象模型。 基本思想：类（class）和实例，1）类用于定义抽象类型；2）实例是根据类的定义被创建出来的。 数据封装：同一个类中的实例拥有相同的数据类型和不同的属性。 class：按照 Python 的编程习惯，类名以大写字母开头，紧接着是(object)，表示该类是从哪个类继承下来的。实例：请练习">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-14T13:51:40.196Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python_mocco进阶笔记（三）">
+<meta name="twitter:description" content="#面向对象编程  面向对象的编程：是一种程序设计范式，把程序看作各种对象间的相互调用，对现实世界建立对象模型。 基本思想：类（class）和实例，1）类用于定义抽象类型；2）实例是根据类的定义被创建出来的。 数据封装：同一个类中的实例拥有相同的数据类型和不同的属性。 class：按照 Python 的编程习惯，类名以大写字母开头，紧接着是(object)，表示该类是从哪个类继承下来的。实例：请练习">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://joeychan0813.github.io/2018/02/14/2018_02_14/"/>
+
+
+
+
+
+  <title>Python_mocco进阶笔记（三） | JoeyChan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JoeyChan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My favorate faded fantacy.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://joeychan0813.github.io/2018/02/14/2018_02_14/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JoeyChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoeyChan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python_mocco进阶笔记（三）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-14T00:00:00+08:00">
+                2018-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,296 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#面向对象编程</p>
+<ul>
+<li>面向对象的编程：是一种程序设计范式，把程序看作各种对象间的相互调用，对现实世界建立对象模型。</li>
+<li>基本思想：类（class）和实例，1）类用于定义抽象类型；2）实例是根据类的定义被创建出来的。</li>
+<li>数据封装：同一个类中的实例拥有相同的数据类型和不同的属性。</li>
+<li>class：按照 Python 的编程习惯，类名以大写字母开头，紧接着是(object)，表示该类是从哪个类继承下来的。<br><strong>实例：</strong>请练习定义Person类，并创建出两个实例，打印实例，再比较两个实例是否相等。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    pass</span><br><span class="line">xiaoming = Person()</span><br><span class="line">xiaohong = Person()</span><br><span class="line">print xiaoming</span><br><span class="line">print xiaohong</span><br><span class="line">print xiaoming == xiaohong</span><br><span class="line"></span><br><span class="line">结果：</span><br><span class="line">&lt;__main__.Person object at 0x7fcee4b9f450&gt;</span><br><span class="line">&lt;__main__.Person object at 0x7fcee4adead0&gt;</span><br><span class="line">False</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>pass能够创建一个最简单的类。结果中出现的<strong>main</strong>意思是，调用模块本身。</p>
+<ul>
+<li><p>创建实例属性：<br><strong>实例：</strong>请创建包含两个 Person 类的实例的 list，并给两个实例的 name 赋值，然后按照 name 进行排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">p1 = Person()</span><br><span class="line">p1.name = &apos;Bart&apos;</span><br><span class="line"></span><br><span class="line">p2 = Person()</span><br><span class="line">p2.name = &apos;Adam&apos;</span><br><span class="line"></span><br><span class="line">p3 = Person()</span><br><span class="line">p3.name = &apos;Lisa&apos;</span><br><span class="line"></span><br><span class="line">L1 = [p1, p2, p3]</span><br><span class="line">L2 = sorted(L1,key = lambda x:x.name)</span><br><span class="line">。</span><br><span class="line">print L2[0].name</span><br><span class="line">print L2[1].name</span><br><span class="line">print L2[2].name</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化实例属性：现实世界中，一种类型的实例应该拥有相同名字的属性。例如，Person类应该在创建的时候就拥有 name、gender 和 birth 属性，怎么办？在定义 Person 类时，可以为Person类添加一个特殊的<strong>init</strong>()方法，当创建实例时，<strong>init</strong>()方法被自动调用，我们就能在此为每个实例都统一加上以下属性。<strong>init</strong>() 方法的第一个参数必须是 self（也可以用别的名字，但建议使用习惯用法），后续参数则可以自由指定，和定义函数没有任何区别。相应地，创建实例时，就必须要提供<strong>除 self 以外</strong>的参数。（除了可以直接使用self.name = ‘xxx’设置一个属性外，还可以通过 setattr(self, ‘name’, ‘xxx’) 设置属性。）<br><strong>实例：</strong>请定义Person类的<strong>init</strong>方法，除了接受 name、gender 和 birth 外，还可接受任意关键字参数，并把他们都作为属性赋值给实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    def __init__(self, name, gender, birth, **kw):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line">        self.birth = birth</span><br><span class="line">        for k, v in kw.iteritems():</span><br><span class="line">            setattr(self, k, v)</span><br><span class="line">xiaoming = Person(&apos;Xiao Ming&apos;, &apos;Male&apos;, &apos;1990-1-1&apos;, job=&apos;Student&apos;)</span><br><span class="line">print xiaoming.name</span><br><span class="line">print xiaoming.job</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>访问限制：Python对属性权限的控制是通过属性名来实现的，如果一个属性由<strong>双下划线</strong>开头(<em> </em>)，该属性就无法被外部访问。但是，如果一个属性以<strong>xxx</strong>的形式定义，那它又可以被外部访问了，以<strong>xxx</strong>定义的属性在Python的类中被称为<strong>特殊属性</strong>，有很多预定义的特殊属性可以使用，通常我们不要把普通属性用<strong>xxx</strong>定义。以单下划线开头的属性”_xxx”虽然也可以被外部访问，但是，按照习惯，他们不应该被外部访问。（一般来讲，2个的区别是：_xxx 可以在子类中使用。<strong>xxx 不可以在子类中使用。）<br><strong>实例：</strong>请给Person类的</strong>init<strong>方法中添加name和score参数，并把score绑定到</strong>score属性上，看看外部是否能访问到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    def __init__(self, name, score):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.__score = score</span><br><span class="line">p = Person(&apos;Bob&apos;, 59)</span><br><span class="line">print p.name</span><br><span class="line">try :</span><br><span class="line">    print p.__score</span><br><span class="line">except AttributeError:</span><br><span class="line">    print &apos;Attributeerror&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建类属性：实例属性每个实例各自拥有，互相独立，而类属性有且只有一份。<strong>1）</strong>访问类属性不需要创建实例，就可以直接访问（print Person.address）<strong>2）</strong>对一个实例调用类的属性也是可以访问的（p1 = Person(‘Bob’)||print p1.address）。<strong>3）</strong>由于Python是动态语言，类属性也是可以动态添加和修改的。<strong>4）</strong>修改类属性会导致所有实例访问到的类属性<strong>全部都受影响</strong>。<br><strong>实例：</strong>请给 Person 类添加一个类属性 count，每创建一个实例，count 属性就加 1，这样就可以统计出一共创建了多少个 Person 的实例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    count = 0</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        Person.count = Person.count + 1</span><br><span class="line">        self.name = name</span><br><span class="line">p1 = Person(&apos;Bob&apos;)</span><br><span class="line">print Person.count</span><br><span class="line">p2 = Person(&apos;Alice&apos;)</span><br><span class="line">print Person.count</span><br><span class="line">p3 = Person(&apos;Tim&apos;)</span><br><span class="line">print Person.count</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类属性和实例属性名字冲突怎么办：当实例属性和类属性重名时，<strong>实例属性优先级高</strong>，它将屏蔽掉对类属性的访问。（<strong>不要在实例上修改类属性</strong>，它实际上并没有修改类属性，而是给实例绑定了一个实例属性。）<br><strong>实例：</strong>请把上节的 Person 类属性 count 改为 __count，再试试能否从实例和类访问该属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    __count = 0</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        Person.__count = Person.__count + 1</span><br><span class="line">        self.name = name</span><br><span class="line">        print Person.__count</span><br><span class="line">p1 = Person(&apos;Bob&apos;)</span><br><span class="line">p2 = Person(&apos;Alice&apos;)</span><br><span class="line">try:</span><br><span class="line">    print Person.__count</span><br><span class="line">except AttributeError:</span><br><span class="line">    print &apos;attributeerror&apos;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义实例的方法：私有属性无法从外部访问，但是，从类的内部是可以访问的。除了可以定义实例的属性外，还可以定义实例的方法。实例的方法就是<strong>在类中定义的函数</strong>，它的<strong>第一个参数永远是 self</strong>，指向调用该方法的实例本身，其他参数和一个普通函数是完全一样的。<strong>ex：</strong>get_name(self) 就是一个实例方法，它的第一个参数是self。<strong>init</strong>(self, name)其实也可看做是一个特殊的实例方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p1 = Person(&apos;Bob&apos;)</span><br><span class="line">print p1.get_name()  # self不需要显式传入</span><br><span class="line"># =&gt; Bob</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在实例方法内部，可以访问所有实例属性，这样，<strong>如果外部需要访问私有属性，可以通过方法调用获得</strong>，这种数据封装的形式除了能保护内部数据一致性外，还可以简化外部调用的难度。<br><strong>实例：</strong>请给 Person 类增加一个私有属性 <strong>score，表示分数，再增加一个实例方法 get_grade()，能根据 </strong>score 的值分别返回 A-优秀, B-及格, C-不及格三档。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, score):</span><br><span class="line">        self.name = name</span><br><span class="line">        self._score = score</span><br><span class="line"></span><br><span class="line">    def get_grade(self):</span><br><span class="line">        if self._score &gt; 80:</span><br><span class="line">            return &apos;A&apos;</span><br><span class="line">        if self._score &gt; 60:</span><br><span class="line">            return &apos;B&apos;</span><br><span class="line">        else:</span><br><span class="line">            return &apos;C&apos;</span><br><span class="line">p1 = Person(&apos;Bob&apos;, 90)</span><br><span class="line">p2 = Person(&apos;Alice&apos;, 65)</span><br><span class="line">p3 = Person(&apos;Tim&apos;, 48)</span><br><span class="line"></span><br><span class="line">print p1.get_grade()</span><br><span class="line">print p2.get_grade()</span><br><span class="line">print p3.get_grade()</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>python中方法也是属性：我们在 class 中定义的实例方法其实也是属性，它实际上是一个函数对象。因为方法也是一个属性，所以，它也可以<strong>动态地添加到实例上</strong>，只是需要用 <strong>types.MethodType() </strong> 把一个函数变为一个方法。<br><strong>实例：</strong>由于属性可以是普通的值对象，如 str，int 等，也可以是方法，还可以是函数，大家看看下面代码的运行结果，请想一想 p1.get_grade 为什么是函数而不是方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    def __init__(self, name, score):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line">        self.get_grade = lambda: &apos;A&apos;</span><br><span class="line"></span><br><span class="line">p1 = Person(&apos;Bob&apos;, 90)</span><br><span class="line">print p1.get_grade</span><br><span class="line">print p1.get_grade()</span><br><span class="line"></span><br><span class="line">答：lambda: &apos;A&apos;等价于return&apos;A&apos;,相当于一个函数f，那么f()=&apos;A&apos;.因此，p1.get_grade=f，p1.get_grade（）=f()就是这个意思，但没有说全。</span><br><span class="line">p1.get_grade是属性，只不过这里的属性是一个函数对象，即f</span><br><span class="line">p1.get_grade()是方法，前面的p1就是调用这个方法的对象，即实例，整句来说就是实例方法</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义类方法：和属性类似，方法也分实例方法和类方法。<strong>在class中定义的全部是实例方法</strong>，实例方法第一个参数 self 是实例本身。要在class中定义类方法，需要这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    count = 0</span><br><span class="line">    @classmethod</span><br><span class="line">    def how_many(cls):</span><br><span class="line">        return cls.count</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line">        Person.count = Person.count + 1</span><br><span class="line"></span><br><span class="line">print Person.how_many()</span><br><span class="line">p1 = Person(&apos;Bob&apos;)</span><br><span class="line">print Person.how_many()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>通过标记一个 @classmethod，该方法将绑定到 Person 类上，而非类的实例。类方法的第一个参数将传入类本身，<strong>通常将参数名命名为 cls</strong>，上面的 cls.count 实际上相当于 Person.count。因为是在类上调用，而非实例上调用，因此类方法无法获得任何实例变量，只能获得类的引用。<br><strong>实例：</strong>如果将类属性 count 改为私有属性<strong>count，则外部无法读取</strong>score，但可以通过一个类方法获取，请编写类方法获得__count值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    __count = 0</span><br><span class="line">    @classmethod</span><br><span class="line">    def how_many(cls):</span><br><span class="line">        return cls.__count</span><br><span class="line">    def __init__(self, name):</span><br><span class="line">        self.name = name</span><br><span class="line">        Person.__count = Person.__count + 1</span><br><span class="line"></span><br><span class="line">print Person.how_many()</span><br><span class="line">p1 = Person(&apos;Bob&apos;)</span><br><span class="line">print Person.how_many()</span><br></pre></td></tr></table></figure></p>
+<p>（私有属性不可以直接被调用，但可以通过方法来调用，包括类方法和实例方法，所以如果要想调用出私有属性的值，定义方法就可以啦）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/11/2018_01_11_2/" rel="next" title="Linux入门笔记（三）">
+                <i class="fa fa-chevron-left"></i> Linux入门笔记（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/28/2018_02_28/" rel="prev" title="Python_mocco进阶笔记（四）">
+                Python_mocco进阶笔记（四） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjcwNy85MjY4"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JoeyChan" />
+            
+              <p class="site-author-name" itemprop="name">JoeyChan</p>
+              <p class="site-description motion-element" itemprop="description">Life with beauty.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22605222&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JoeyChan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Python中什么是特殊方法 任何数据类型的实例都有一个特殊方法：\ str()，用于print；用于len的\ len()；用于比较函数的\ cmp()以及其它。特点：1）特殊方法定义在class中；2）不需要直接调用；3）Python的某些函数或操作符会调用对应的特殊方法。如何正确实现特殊方法：1）只需要编写用到的特殊方法；2）有关联性的特殊方法都必须实现。 python中 \ str和\ r">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python_mocco进阶笔记（五）">
+<meta property="og:url" content="https://joeychan0813.github.io/2018/03/08/2018_03_08/index.html">
+<meta property="og:site_name" content="JoeyChan">
+<meta property="og:description" content="Python中什么是特殊方法 任何数据类型的实例都有一个特殊方法：\ str()，用于print；用于len的\ len()；用于比较函数的\ cmp()以及其它。特点：1）特殊方法定义在class中；2）不需要直接调用；3）Python的某些函数或操作符会调用对应的特殊方法。如何正确实现特殊方法：1）只需要编写用到的特殊方法；2）有关联性的特殊方法都必须实现。 python中 \ str和\ r">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-08T04:39:08.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python_mocco进阶笔记（五）">
+<meta name="twitter:description" content="Python中什么是特殊方法 任何数据类型的实例都有一个特殊方法：\ str()，用于print；用于len的\ len()；用于比较函数的\ cmp()以及其它。特点：1）特殊方法定义在class中；2）不需要直接调用；3）Python的某些函数或操作符会调用对应的特殊方法。如何正确实现特殊方法：1）只需要编写用到的特殊方法；2）有关联性的特殊方法都必须实现。 python中 \ str和\ r">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://joeychan0813.github.io/2018/03/08/2018_03_08/"/>
+
+
+
+
+
+  <title>Python_mocco进阶笔记（五） | JoeyChan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JoeyChan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My favorate faded fantacy.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://joeychan0813.github.io/2018/03/08/2018_03_08/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JoeyChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoeyChan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python_mocco进阶笔记（五）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-08T00:00:00+08:00">
+                2018-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,744 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Python中什么是特殊方法"><a href="#Python中什么是特殊方法" class="headerlink" title="Python中什么是特殊方法"></a>Python中什么是特殊方法</h1><ul>
+<li>任何数据类型的实例都有一个特殊方法：\ <strong>str</strong>()，用于print；用于len的\ <strong>len</strong>()；用于比较函数的\ <strong>cmp</strong>()以及其它。<br>特点：1）特殊方法定义在class中；2）不需要直接调用；3）Python的某些函数或操作符会调用对应的特殊方法。<br>如何正确实现特殊方法：1）只需要编写用到的特殊方法；2）有关联性的特殊方法都必须实现。</li>
+<li>python中 \ <strong>str</strong>和\ <strong>repr</strong>:\ <strong>str</strong>()用于显示给用户，而\ <strong>repr</strong>()用于显示给开发人员。<br>（\ <strong>str</strong>：把一个类的实例变成 str）<br>实例：请给Student 类定义\ <strong>str</strong>和\ <strong>repr</strong>方法，使得能打印出&lt; Student: name, gender, score &gt;：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Student(Person):</span><br><span class="line">    def __init__(self, name, gender, score):</span><br><span class="line">        super(Student, self).__init__(name, gender)</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, gender):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line"></span><br><span class="line">class Student(Person):</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, gender, score):</span><br><span class="line">        super(Student, self).__init__(name, gender)</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">    def __str__(self):</span><br><span class="line">        return &apos;(Student: %s, %s, %s)&apos; % (self.name, self.gender, self.score)</span><br><span class="line">        __repr__ = __str__</span><br><span class="line">s = Student(&apos;Bob&apos;, &apos;male&apos;, 88)</span><br><span class="line">print s</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>\ <strong>cmp</strong>：对 int、str 等内置数据类型排序时，Python的 sorted() 按照默认的比较函数 cmp 排序，但是，如果对一组 Student 类的实例排序时，就必须提供我们自己的特殊方法 \ <strong>cmp</strong>()。<br>实例：请修改 Student 的 \ <strong>cmp</strong> 方法，让它按照分数从高到底排序，分数相同的按名字排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, score):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">    def __str__(self):</span><br><span class="line">        return &apos;(%s: %s)&apos; % (self.name, self.score)</span><br><span class="line"></span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line">    def __cmp__(self, s):</span><br><span class="line">        if self.score == s.score:</span><br><span class="line">            return cmp(self.name, s.name)</span><br><span class="line">        else:</span><br><span class="line">            return -cmp(self.score, s.score)    -----（默认是从小到大？？？）</span><br><span class="line">            </span><br><span class="line">L = [Student(&apos;Tim&apos;, 99), Student(&apos;Bob&apos;, 88), Student(&apos;Alice&apos;, 99)]</span><br><span class="line">print sorted(L)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>\ <strong>len</strong>：它返回元素的个数。<br>实例：斐波那契数列是由 0, 1, 1, 2, 3, 5, 8…构成。请编写一个Fib类，Fib(10)表示数列的前10个元素，print Fib(10) 可以打印出数列的前 10 个元素，len(Fib(10))可以正确返回数列的个数10。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, num):</span><br><span class="line">        a, b, L = 0, 1, []</span><br><span class="line">        for n in range(num):</span><br><span class="line">            L.append(a)</span><br><span class="line">            a, b = b, a + b</span><br><span class="line">        self.numbers = L</span><br><span class="line">        </span><br><span class="line">    def __str__(self):</span><br><span class="line">        return str(self.numbers)</span><br><span class="line">        </span><br><span class="line">    __repr__ = __str__</span><br><span class="line">    </span><br><span class="line">    def __len__(self):</span><br><span class="line">        return len(self.numbers)</span><br><span class="line">        </span><br><span class="line">f = Fib(10)</span><br><span class="line">print f</span><br><span class="line">print len(f)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数学运算：Python 提供的基本数据类型 int、float 可以做整数和浮点的四则运算以及乘方等运算。但是，四则运算不局限于int和float，还可以是有理数、矩阵等。要表示有理数，可以用一个Rational类来表示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Rational(object):</span><br><span class="line">    def __init__(self, p, q):</span><br><span class="line">        self.p = p</span><br><span class="line">        self.q = q</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>p、q 都是整数，表示有理数 p/q。<br>如果要让Rational进行+运算，需要正确实现\ <strong>add</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Rational(object):</span><br><span class="line">    def __init__(self, p, q):</span><br><span class="line">        self.p = p</span><br><span class="line">        self.q = q</span><br><span class="line">    def __add__(self, r):</span><br><span class="line">        return Rational(self.p * r.q + self.q * r.p, self.q * r.q)</span><br><span class="line">    def __str__(self):</span><br><span class="line">        return &apos;%s/%s&apos; % (self.p, self.q)</span><br><span class="line">    __repr__ = __str__</span><br></pre></td></tr></table></figure></p>
+<p>实例：Rational类虽然可以做加法，但无法做减法、乘方和除法，请继续完善Rational类，实现四则运算。<br>提示：<br>减法运算：\ <strong>sub</strong><br>乘法运算：\ <strong>mul</strong><br>除法运算：\ <strong>div</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">def gcd(a,b):</span><br><span class="line">    while b:</span><br><span class="line">        a, b = b, a % b</span><br><span class="line">    return a</span><br><span class="line"></span><br><span class="line">class Rational(object):</span><br><span class="line">    def __init__(self, p, q):</span><br><span class="line">        self.p = p</span><br><span class="line">        self.q = q</span><br><span class="line">    def __add__(self, r):</span><br><span class="line">        return Rational(self.p * r.q + self.q * r.p, self.q * r.q)</span><br><span class="line">    def __sub__(self, r):</span><br><span class="line">        return Rational(self.p * r.q - self.q * r.p, self.q * r.q)</span><br><span class="line">    def __mul__(self, r):</span><br><span class="line">        return Rational(self.p * r.p, self.q * r.q)</span><br><span class="line">    def __div__(self, r):</span><br><span class="line">        return Rational(self.p * r.q, self.q * r.p)</span><br><span class="line">    def __str__(self):</span><br><span class="line">        g = gcd(self.p, self.q)</span><br><span class="line">        return &apos;%s/%s&apos; % (self.p / g, self.q / g)</span><br><span class="line">    __repr__ = __str__</span><br><span class="line"></span><br><span class="line">r1 = Rational(1, 2)</span><br><span class="line">r2 = Rational(1, 4)</span><br><span class="line">print r1 + r2</span><br><span class="line">print r1 - r2</span><br><span class="line">print r1 * r2</span><br><span class="line">print r1 / r2</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>类型转换：实例：请继续完善Rational，使之可以转型为float。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Rational(object):</span><br><span class="line">    def __init__(self, p, q):</span><br><span class="line">        self.p = p</span><br><span class="line">        self.q = q</span><br><span class="line"></span><br><span class="line">    def __int__(self):</span><br><span class="line">        return self.p // self.q</span><br><span class="line"></span><br><span class="line">    def __float__(self):</span><br><span class="line">        return self.p * 1.0 / self.q * 1.0</span><br><span class="line"></span><br><span class="line">print float(Rational(7, 2))</span><br><span class="line">print float(Rational(1, 3))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>@property：这是关键字，固定格式，能让方法当“属性”用。<br>实例：如果没有定义set方法，就不能对“属性”赋值，这时，就可以创建一个只读“属性”。请给Student类加一个grade属性，根据 score 计算 A（&gt;=80）、B、C（&lt;60）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Student(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, name, score):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.__score = score</span><br><span class="line"></span><br><span class="line">    @property</span><br><span class="line">    def score(self):</span><br><span class="line">        return self.__score</span><br><span class="line"></span><br><span class="line">    @score.setter</span><br><span class="line">    def score(self, score):</span><br><span class="line">        if score &lt; 0 or score &gt; 100:</span><br><span class="line">            raise ValueError(&apos;invalid score&apos;)</span><br><span class="line">        self.__score = score</span><br><span class="line">        </span><br><span class="line">    @property</span><br><span class="line">    def grade(self):</span><br><span class="line">        if self.score &gt; 80:</span><br><span class="line">            return &apos;A&apos;</span><br><span class="line">        if self.score &lt; 60:</span><br><span class="line">            return &apos;C&apos;</span><br><span class="line">        return &apos;B&apos;</span><br><span class="line"></span><br><span class="line">s = Student(&apos;Bob&apos;, 59)</span><br><span class="line">print s.grade</span><br><span class="line"></span><br><span class="line">s.score = 60</span><br><span class="line">print s.grade</span><br><span class="line"></span><br><span class="line">s.score = 99</span><br><span class="line">print s.grade</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>@score.setter—前面的”score”是@property紧跟的下面定义的那个方法的名字，”setter”是关键字，这种“@+方法名字+点+setter”是个固定格式与@property搭配使用。</p>
+<ul>
+<li><p>\ <strong>slots</strong>： 由于Python是动态语言，任何实例在运行期都可以动态地添加属性。如果要限制添加的属性，例如，Student类只允许添加 name、gender和score 这3个属性，就可以利用Python的一个特殊的\ <strong>slots</strong>来实现。顾名思义，\ <strong>slots</strong>是指一个类允许的属性列表，目的是限制当前类所能拥有的属性，如果不需要添加任意动态的属性，使用\ <strong>slots</strong>也能节省内存。（\ <strong>slots</strong>定义的属性仅对当前类起作用，对继承的子类是不起作用的。除非在子类中也定义\ <strong>slots</strong>，就像答案中一样，子类允许定义的属性就是自身的\ r，请在派生类Student中通过<strong>slots</strong>继续添加score的定义，使Student类可以实现name、gender和score 3个属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    __slots__ = (&apos;name&apos;, &apos;gender&apos;)</span><br><span class="line">    def __init__(self, name, gender):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line"></span><br><span class="line">class Student(Person):</span><br><span class="line">    __slots__ = (&apos;score&apos;, &apos;name&apos;, &apos;gender&apos;)</span><br><span class="line">    def __init__(self, name, gender, score):</span><br><span class="line">        super(Student, self).__init__(name, gender)</span><br><span class="line">        self.score = score</span><br><span class="line"></span><br><span class="line">s = Student(&apos;Bob&apos;, &apos;male&apos;, 59)</span><br><span class="line">s.name = &apos;Tim&apos;</span><br><span class="line">s.score = 99</span><br><span class="line">print s.score</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>\ <strong>call</strong>：在Python中，函数其实是一个对象。由于 f 可以被调用，所以，f 被称为可调用对象。所有的函数都是可调用对象。一个类实例也可以变成一个可调用对象，只需要实现一个特殊方法\ <strong>call</strong>()。实例：<br>改进一下前面定义的斐波那契数列：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    ???</span><br><span class="line">请加一个__call__方法，让调用更简单：</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; f = Fib()</span><br><span class="line">&gt;&gt;&gt; print f(10)</span><br><span class="line">[0, 1, 1, 2, 3, 5, 8, 13, 21, 34]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Fib(object):</span><br><span class="line">    def __call__(self, num):</span><br><span class="line">        a, b, L = 0, 1, []</span><br><span class="line">        for n in range(num):</span><br><span class="line">            L.append(a)</span><br><span class="line">            a, b = b, a + b</span><br><span class="line">        return L</span><br><span class="line">f = Fib()</span><br><span class="line">print f(10)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/28/2018_02_28/" rel="next" title="Python_mocco进阶笔记（四）">
+                <i class="fa fa-chevron-left"></i> Python_mocco进阶笔记（四）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjcwNy85MjY4"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JoeyChan" />
+            
+              <p class="site-author-name" itemprop="name">JoeyChan</p>
+              <p class="site-description motion-element" itemprop="description">Life with beauty.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22605222&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python中什么是特殊方法"><span class="nav-number">1.</span> <span class="nav-text"><a href="#Python&#x4E2D;&#x4EC0;&#x4E48;&#x662F;&#x7279;&#x6B8A;&#x65B9;&#x6CD5;" class="headerlink" title="Python&#x4E2D;&#x4EC0;&#x4E48;&#x662F;&#x7279;&#x6B8A;&#x65B9;&#x6CD5;"></a>Python&#x4E2D;&#x4EC0;&#x4E48;&#x662F;&#x7279;&#x6B8A;&#x65B9;&#x6CD5;</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JoeyChan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

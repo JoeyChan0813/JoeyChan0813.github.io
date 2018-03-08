@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="#类的继承  继承：1）复用已有代码；2）自动拥有现有类的所有功能；3）只需要编写缺少的新功能。 Person（父类，基类，超类），Student（子类，派生类，继承类） 继承的特点：1）子类和父类是is关系（子类必是父类）；2）has关系应用组合而非继承；3）总是从某个类继承（没有父类就从object类继承）；4）不要忘记调用super.  init  （这个方法应该是以父类的初始化方式初始化子">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python_mocco进阶笔记（四）">
+<meta property="og:url" content="https://joeychan0813.github.io/2018/02/28/2018_02_28/index.html">
+<meta property="og:site_name" content="JoeyChan">
+<meta property="og:description" content="#类的继承  继承：1）复用已有代码；2）自动拥有现有类的所有功能；3）只需要编写缺少的新功能。 Person（父类，基类，超类），Student（子类，派生类，继承类） 继承的特点：1）子类和父类是is关系（子类必是父类）；2）has关系应用组合而非继承；3）总是从某个类继承（没有父类就从object类继承）；4）不要忘记调用super.  init  （这个方法应该是以父类的初始化方式初始化子">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-28T10:02:35.096Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python_mocco进阶笔记（四）">
+<meta name="twitter:description" content="#类的继承  继承：1）复用已有代码；2）自动拥有现有类的所有功能；3）只需要编写缺少的新功能。 Person（父类，基类，超类），Student（子类，派生类，继承类） 继承的特点：1）子类和父类是is关系（子类必是父类）；2）has关系应用组合而非继承；3）总是从某个类继承（没有父类就从object类继承）；4）不要忘记调用super.  init  （这个方法应该是以父类的初始化方式初始化子">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://joeychan0813.github.io/2018/02/28/2018_02_28/"/>
+
+
+
+
+
+  <title>Python_mocco进阶笔记（四） | JoeyChan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JoeyChan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My favorate faded fantacy.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://joeychan0813.github.io/2018/02/28/2018_02_28/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JoeyChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoeyChan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python_mocco进阶笔记（四）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T00:00:00+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,191 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>#类的继承</p>
+<ul>
+<li>继承：1）复用已有代码；2）自动拥有现有类的所有功能；3）只需要编写缺少的新功能。</li>
+<li>Person（父类，基类，超类），Student（子类，派生类，继承类）</li>
+<li><p>继承的特点：1）子类和父类是is关系（子类必是父类）；2）has关系应用组合而非继承；3）总是从某个类继承（没有父类就从object类继承）；4）不要忘记调用super.<em> </em> init <em> </em>（这个方法应该是以父类的初始化方式初始化子类属性如果子类的初始化方式和父类不同，应该是可以再重写方法来代替super进行初始化但假若不写的话，会直接影响到继承父类属性的存在，就算接收了参数也没地方放，因为初始化无视了它）。ex：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Student(Person):</span><br><span class="line">    def __init__(self, name, gender, school, score):</span><br><span class="line">        ## 重要重要重要</span><br><span class="line">        super(Student, self).__init_(name, gender) // 调用父类的构造方法，防止父类的属性在初始化出现其他错误</span><br><span class="line">        self.school = school</span><br><span class="line">        self.score = score</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断类型：函数isinstance()可以判断一个变量的类型，既可以用在Python内置的数据类型如str、list、dict，也可以用在我们自定义的类，它们本质上都是<strong>数据类型</strong>。【在继承链上，一个父类的实例不能是子类类型，因为子类比父类多了一些属性和方法。这说明在一条继承链上，一个实例可以看成它本身的类型，也可以看成它父类的类型。】</p>
+</li>
+<li>多态：其实这里多态的意思就是: 对不同对象, 调用了同一个名字的方法 some_func ,  可以表现出不同的状态, 返回不同的结果。原因是虽然不同的对象/实例/类 中定义了的这个方法 some_func , 但是除了名字相同, 函数体随便怎么写都可以.。（同名不同参？？？）<br>实例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    def __init__(self, name, gender):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line">    def whoAmI(self):</span><br><span class="line">        return &apos;I am a Person, my name is %s&apos; % self.name</span><br><span class="line"></span><br><span class="line">class Student(Person):</span><br><span class="line">    def __init__(self, name, gender, score):</span><br><span class="line">        super(Student, self).__init__(name, gender)</span><br><span class="line">        self.score = score</span><br><span class="line">    def whoAmI(self):</span><br><span class="line">        return &apos;I am a Student, my name is %s&apos; % self.name</span><br><span class="line"></span><br><span class="line">class Teacher(Person):</span><br><span class="line">    def __init__(self, name, gender, course):</span><br><span class="line">        super(Teacher, self).__init__(name, gender)</span><br><span class="line">        self.course = course</span><br><span class="line">    def whoAmI(self):</span><br><span class="line">        return &apos;I am a Teacher, my name is %s&apos; % self.name</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">def who_am_i(x):</span><br><span class="line">    print x.whoAmI()</span><br><span class="line"></span><br><span class="line">p = Person(&apos;Tim&apos;, &apos;Male&apos;)</span><br><span class="line">s = Student(&apos;Bob&apos;, &apos;Male&apos;, 88)</span><br><span class="line">t = Teacher(&apos;Alice&apos;, &apos;Female&apos;, &apos;English&apos;)</span><br><span class="line"></span><br><span class="line">who_am_i(p)</span><br><span class="line">who_am_i(s)</span><br><span class="line">who_am_i(t)</span><br><span class="line"></span><br><span class="line">运行结果：</span><br><span class="line"></span><br><span class="line">I am a Person, my name is Tim</span><br><span class="line">I am a Student, my name is Bob</span><br><span class="line">I am a Teacher, my name is Alice</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多重继承：从多个父类继承。（从括号<strong>右边</strong>开始继承，广度优先！！！）<br>实例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class A(object):</span><br><span class="line">    def __init__(self, a):</span><br><span class="line">        print &apos;init A...&apos;</span><br><span class="line">        self.a = a</span><br><span class="line"></span><br><span class="line">class B(A):</span><br><span class="line">    def __init__(self, a):</span><br><span class="line">        super(B, self).__init__(a)</span><br><span class="line">        print &apos;init B...&apos;</span><br><span class="line"></span><br><span class="line">class C(A):</span><br><span class="line">    def __init__(self, a):</span><br><span class="line">        super(C, self).__init__(a)</span><br><span class="line">        print &apos;init C...&apos;</span><br><span class="line"></span><br><span class="line">class D(B, C):</span><br><span class="line">    def __init__(self, a):</span><br><span class="line">        super(D, self).__init__(a)</span><br><span class="line">        print &apos;init D...&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; d = D(&apos;d&apos;)</span><br><span class="line">init A...</span><br><span class="line">init C...</span><br><span class="line">init B...</span><br><span class="line">init D...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取对象信息： 1）首先可以用 type() 函数获取变量的类型，它返回一个 Type 对象；2）用 dir() 函数获取变量的所有属性。（如何去掉<strong>xxx</strong>这类的特殊属性，只保留我们自己定义的属性？回顾一下filter()函数的用法。dir()返回的属性是字符串列表，如果已知一个属性名称，要获取或者设置对象的属性，就需要用 getattr() 和 setattr( )函数了）举例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; getattr(s, &apos;name&apos;)  # 获取name属性</span><br><span class="line">&apos;Bob&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; setattr(s, &apos;name&apos;, &apos;Adam&apos;)  # 设置新的name属性</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; s.name</span><br><span class="line">&apos;Adam&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; getattr(s, &apos;age&apos;)  # 获取age属性，但是属性不存在，报错：</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">AttributeError: &apos;Student&apos; object has no attribute &apos;age&apos;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; getattr(s, &apos;age&apos;, 20)  # 获取age属性，如果属性不存在，就返回默认值20：</span><br><span class="line">20</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>实例：对于Person类的定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    def __init__(self, name, gender):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br></pre></td></tr></table></figure></p>
+<p>希望除了 name和gender 外，可以提供任意额外的关键字参数，并绑定到实例，请修改 Person 的 <strong>init</strong>()定 义，完成该功能。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    def __init__(self, name, gender, **kw):</span><br><span class="line">        self.name = name</span><br><span class="line">        self.gender = gender</span><br><span class="line">        for k, v in kw.iteritems():</span><br><span class="line">            setattr(self, k, v)</span><br><span class="line">p = Person(&apos;Bob&apos;, &apos;Male&apos;, age=18, course=&apos;Python&apos;)</span><br><span class="line">print p.age</span><br><span class="line">print p.course</span><br></pre></td></tr></table></figure></p>
+<p>（**kw是关键字参数，用于字典 ；iteritems()用于字典kw的遍历；setattr(self, k, v)就等价于self.k = v；综上就是，遍历dict  kw 中的属性，给每个属性设置了属性值）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/14/2018_02_14/" rel="next" title="Python_mocco进阶笔记（三）">
+                <i class="fa fa-chevron-left"></i> Python_mocco进阶笔记（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/08/2018_03_08/" rel="prev" title="Python_mocco进阶笔记（五）">
+                Python_mocco进阶笔记（五） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjcwNy85MjY4"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JoeyChan" />
+            
+              <p class="site-author-name" itemprop="name">JoeyChan</p>
+              <p class="site-description motion-element" itemprop="description">Life with beauty.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22605222&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JoeyChan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

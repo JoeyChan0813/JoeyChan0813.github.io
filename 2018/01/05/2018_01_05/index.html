@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,Vim," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="vim重复命令：1）重复执行上次命令：普通模式下的 .（小数点）表示重复上一次的命令操作。2）执行指定次数的相同命令：普通模式输入N&amp;lt; command &amp;gt;，N表示重复后面的次数。在普通模式下，你还可以使用dw或者daw(delete a word)删除一个单词，所以你可以很容易的联想到dnw(n替换为相应数字)表示删除n个单词。 游标的快速跳转：1）命令：说明nG(n Shift+g">
+<meta name="keywords" content="Linux,Vim">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim编辑器入门（二）">
+<meta property="og:url" content="https://joeychan0813.github.io/2018/01/05/2018_01_05/index.html">
+<meta property="og:site_name" content="JoeyChan">
+<meta property="og:description" content="vim重复命令：1）重复执行上次命令：普通模式下的 .（小数点）表示重复上一次的命令操作。2）执行指定次数的相同命令：普通模式输入N&amp;lt; command &amp;gt;，N表示重复后面的次数。在普通模式下，你还可以使用dw或者daw(delete a word)删除一个单词，所以你可以很容易的联想到dnw(n替换为相应数字)表示删除n个单词。 游标的快速跳转：1）命令：说明nG(n Shift+g">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-05T10:10:48.391Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim编辑器入门（二）">
+<meta name="twitter:description" content="vim重复命令：1）重复执行上次命令：普通模式下的 .（小数点）表示重复上一次的命令操作。2）执行指定次数的相同命令：普通模式输入N&amp;lt; command &amp;gt;，N表示重复后面的次数。在普通模式下，你还可以使用dw或者daw(delete a word)删除一个单词，所以你可以很容易的联想到dnw(n替换为相应数字)表示删除n个单词。 游标的快速跳转：1）命令：说明nG(n Shift+g">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://joeychan0813.github.io/2018/01/05/2018_01_05/"/>
+
+
+
+
+
+  <title>Vim编辑器入门（二） | JoeyChan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JoeyChan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My favorate faded fantacy.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://joeychan0813.github.io/2018/01/05/2018_01_05/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JoeyChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoeyChan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vim编辑器入门（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T00:00:00+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,121 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>vim重复命令：<br>1）重复执行上次命令：普通模式下的 <strong>.（小数点）</strong>表示重复上一次的命令操作。<br>2）执行指定次数的相同命令：普通模式输入<strong>N&lt; command &gt;</strong>，N表示重复后面的次数。在普通模式下，你还可以使用dw或者daw(delete a word)删除一个单词，所以你可以很容易的联想到<strong>dnw</strong>(n替换为相应数字)表示删除n个单词。</li>
+<li>游标的快速跳转：<br>1）命令：说明<br><strong>nG(n Shift+g)    ：</strong>游标移动到第 n 行(如果默认没有显示行号，请先进入命令模式，输入:set nu以显示行号)<br><strong>gg：</strong>游标移动到到第一行<br><strong>G(Shift+g)：</strong>到最后一行<br><strong>小技巧：</strong>你在完成依次跳转后，可以使用Ctrl+o快速回到上一次(跳转前)光标所在位置。<br>2）行内跳转：<br>命令：说明<br>w：到下一个单词的开头<br>e：到当前单词的结尾<br>b：到前一个单词的开头<br>ge：到前一个单词的结尾<br>0或^：到行头<br>$：到行尾<br>f&lt;字母&gt;：向后搜索&lt;字母&gt;并跳转到第一个匹配的位置(非常实用)<br>F&lt;字母&gt;：向前搜索&lt;字母&gt;并跳转到第一个匹配的位置<br>t&lt;字母&gt;：向后搜索&lt;字母&gt;并跳转到第一个匹配位置之前的一个字母(不常用)<br>T&lt;字母&gt;：向前搜索&lt;字母&gt;并跳转到第一个匹配位置之后的一个字母(不常用)<br>附：~将游标所在字母变成大写或小写</li>
+<li>复制粘贴和剪切：<br><strong>普通模式中使用y复制</strong><br>普通模式中，yy复制游标所在的整行（3yy表示复制3行）<br>普通模式中，y^ 复制至行首，或y0。不含光标所在处字符。<br>普通模式中，y$ 复制至行尾。含光标所在处字符。<br>普通模式中，yw 复制一个单词。<br>普通模式中，y2w 复制两个单词。<br>普通模式中，yG 复制至文本末。<br>普通模式中，y1G 复制至文本开头。<br><strong>普通模式中使用p粘贴</strong><br>普通模式中，p(小写)代表粘贴至光标后（下）<br>普通模式中，P(大写)代表粘贴至光标前（上）<br>其实前面讲得<strong>dd删除命令就是剪切</strong>，你每次dd删除文档内容后，便可以使用p来粘贴，也这一点可以让我们实现一个很爽快的功能——交换上下行：ddp，就这么简单，即实现了快速交换光标所在行与它下面的行。</li>
+<li>查找替换：<br>1）字符的替换及撤销(Undo操作)：<br>命令：说明<br>r+&lt;待替换字母&gt;：将游标所在字母替换为指定字母<br>R：连续替换，直到按下Esc<br>cc：替换整行，即删除游标所在行，并进入插入模式<br>cw：替换一个单词，即删除一个单词，并进入插入模式<br>C(大写：替换游标以后至行末<br>~：反转游标所在字母大小写<br>u{n}：撤销一次或n次操作<br>U(大写：撤销当前行的所有修改<br>Ctrl+r：redo，即撤销undo的操作<br>2）快速缩进：<br>普通模式下输入15G，跳转到15行<br>普通模式下输入&gt;&gt; 整行将向右缩进（使用，用于格式化代码超爽）<br>普通模式下输入&lt;&lt; 整行向左回退<br>普通模式下输入:进入命令行模式下对shiftwidth值进行设置可以控制缩进和回退的字符数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set shiftwidth=10</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>3）调整文本位置：<br>命令行模式下输入：ce(center)命令使本行内容居中<br>命令行模式下输入：:ri(right)命令使本行文本靠右<br>命令行模式下输入：le(left)命令使本行内容靠左</p>
+<ul>
+<li>查找：<br>1）快速查找：<br>普通模式下输入/然后键入需要查找的字符串 按回车后就会进行查找。<br>？与/功能相同，只不过？是向上而/是向下查找。<br>进入查找之后，输入n和N可以继续查找<br>n表示继续查找，N反向查<br>2）高级查找：<br>普通模式下输入*寻找游标所在处的单词<br>普通模式下输入#同上，但 # 是向前（上）找，*则是向后（下）找<br>普通模式下输入g*同* ，但部分符合该单词即可<br>普通模式下输入g#同# ，但部分符合该单词即可</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Vim/" rel="tag"># Vim</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/04/2018_01_04_2/" rel="next" title="Python_mocco入门笔记（四）">
+                <i class="fa fa-chevron-left"></i> Python_mocco入门笔记（四）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/08/2018_01_08_1/" rel="prev" title="Vim编辑器入门（三）">
+                Vim编辑器入门（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjcwNy85MjY4"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JoeyChan" />
+            
+              <p class="site-author-name" itemprop="name">JoeyChan</p>
+              <p class="site-description motion-element" itemprop="description">Life with beauty.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22605222&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JoeyChan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>

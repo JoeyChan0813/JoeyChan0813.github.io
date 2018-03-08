@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="进入上一级目录：cd .. 进入你的home目录：cd ~ （cd/home/&amp;lt;你的用户名&amp;gt;） 使用pwd可以获取当前路径 绝对路径以/开头，相对路径以..开头 新建目录：1）mkdir命令可以新建一个空目录，也可同时指定权限属性$ mkdir mydir2）使用-p参数同时创建父目录：$ mkdir -p father/son/grandson 用cp命令复制文件到指定目录，如果要">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux入门笔记（一）_补充">
+<meta property="og:url" content="https://joeychan0813.github.io/2018/01/08/2018_01_08_2/index.html">
+<meta property="og:site_name" content="JoeyChan">
+<meta property="og:description" content="进入上一级目录：cd .. 进入你的home目录：cd ~ （cd/home/&amp;lt;你的用户名&amp;gt;） 使用pwd可以获取当前路径 绝对路径以/开头，相对路径以..开头 新建目录：1）mkdir命令可以新建一个空目录，也可同时指定权限属性$ mkdir mydir2）使用-p参数同时创建父目录：$ mkdir -p father/son/grandson 用cp命令复制文件到指定目录，如果要">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-11T14:20:17.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux入门笔记（一）_补充">
+<meta name="twitter:description" content="进入上一级目录：cd .. 进入你的home目录：cd ~ （cd/home/&amp;lt;你的用户名&amp;gt;） 使用pwd可以获取当前路径 绝对路径以/开头，相对路径以..开头 新建目录：1）mkdir命令可以新建一个空目录，也可同时指定权限属性$ mkdir mydir2）使用-p参数同时创建父目录：$ mkdir -p father/son/grandson 用cp命令复制文件到指定目录，如果要">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://joeychan0813.github.io/2018/01/08/2018_01_08_2/"/>
+
+
+
+
+
+  <title>Linux入门笔记（一）_补充 | JoeyChan</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">JoeyChan</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">My favorate faded fantacy.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://joeychan0813.github.io/2018/01/08/2018_01_08_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="JoeyChan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JoeyChan">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux入门笔记（一）_补充</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-08T00:00:00+08:00">
+                2018-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,059 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li>进入上一级目录：cd ..</li>
+<li>进入你的home目录：cd ~ （cd/home/&lt;你的用户名&gt;）</li>
+<li>使用pwd可以获取当前路径</li>
+<li>绝对路径以/开头，相对路径以..开头</li>
+<li>新建目录：<br>1）mkdir命令可以新建一个空目录，也可同时指定权限属性<code>$ mkdir mydir</code><br>2）使用-p参数同时创建父目录：<code>$ mkdir -p father/son/grandson</code></li>
+<li>用cp命令复制文件到指定目录，如果要复制目录则加上-r或-R参数表示递归复制</li>
+<li>rm进行删除操作，加上-f参数表示强制删除</li>
+<li>mv命令是剪切移动文件，也可用于重命名单个文件</li>
+<li>批量重命名使用rename命令，举例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#批量将这 5 个后缀为 .txt 的文本文件重命名为以 .c 为后缀的文件:</span><br><span class="line">$ rename &apos;s/\.txt/\.c/&apos; *.txt</span><br><span class="line">#批量将这 5 个文件，文件名改为大写:</span><br><span class="line">$ rename &apos;y/a-z/A-Z/&apos; *.c``</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>rename 是先使用第二个参数的通配符匹配所有后缀为 .txt 的文件，然后使用第一个参数提供的正则表达式将匹配的这些文件的 .txt 后缀替换为 .c，这一点在学习了 sed 命令后会更好地理解。</p>
+<ul>
+<li><p>查看文件：cat 为正序显示，tac 为倒序显示。加上-n参数显示行号。<br><strong>nl 命令</strong>，添加行号并打印，这是个比 cat -n 更专业的行号打印命令。常用参数还有：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-b : 指定添加行号的方式，主要有两种：</span><br><span class="line">    -b a:表示无论是否为空行，同样列出行号(&quot;cat -n&quot;就是这种方式)</span><br><span class="line">    -b t:只列出非空行的编号并列出（默认为这种方式）</span><br><span class="line">-n : 设置行号的样式，主要有三种：</span><br><span class="line">    -n ln:在行号字段最左端显示</span><br><span class="line">    -n rn:在行号字段最右边显示，且不加 0</span><br><span class="line">    -n rz:在行号字段最右边显示，且加 0</span><br><span class="line">-w : 行号字段占用的位数(默认为 6 位)   ex: $ nl -w 2 -n rn file（可并列输入）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>more和less命令用来阅读文件内容。</p>
+</li>
+<li>head和tail命令可以只看文件的头几行个尾几行（默认10），加上 -n 参数，后面紧跟行数。</li>
+<li>file命令查看文件类型</li>
+<li>查看用户：who命令，常用：<br>-a    打印能打印的全部<br>-d    打印死掉的进程<br>-m    同am i,mom likes<br>-q    打印当前登录用户数及用户名<br>-u    打印当前登录用户登录信息<br>-r    打印运行等级</li>
+<li>用户组：groups命令，每次新建用户如果不指定用户组的话，默认会自动创建一个与用户名相同的用户组。</li>
+<li>删除用户：<code>$ sudo deluser lilei --remove-home</code></li>
+<li>查看文件权限：ls -l,ll</li>
+<li>显示所有文件，包括隐藏文件（Linux 下以 . 开头的文件为隐藏文件）：-A</li>
+<li>查看一个目录的完整属性：<code>$ ls -dl &lt;目录名&gt;</code></li>
+<li>显示所有文件大小：<code>$ ls -AsSh</code></li>
+<li>常用快捷键：<br>Tab 命令补全<br>Ctrl+c 强制退出<br>Ctrl+d    键盘输入结束或退出终端<br>Ctrl+s    暂停当前程序，暂停后按下任意键恢复运行<br>Ctrl+z    将当前程序放到后台运行，恢复到前台为命令fg<br>Ctrl+a    将光标移至输入行头，相当于Home键<br>Ctrl+e    将光标移至输入行末，相当于End键<br>Ctrl+k    删除从光标所在位置到行末<br>Alt+Backspace    向前删除一个单词<br>Shift+PgUp    将终端显示向上滚动<br>Shift+PgDn    将终端显示向下滚动</li>
+<li>通配符：星号和 ？<br>当查找文件夹时，可以使用*来代替一个或多个真正字符；当不知道真正字符或者懒得输入完整名字时，常常使用通配符？代替一个或多个真正字符。<br>其他通配符：<br>[list]    匹配 list 中的任意单一字符<br>[!list]    匹配 除list 中的任意单一字符以外的字符<br>[c1-c2]    匹配 c1-c2 中的任意单一字符 如：[0-9] [a-z]<br>{string1,string2,…}    匹配 string1 或 string2 (或更多)其一字符串<br>{c1..c2}    匹配 c1-c2 中全部字符 如{1..10}</li>
+<li>man命令用来获取帮助</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/08/2018_01_08_1/" rel="next" title="Vim编辑器入门（三）">
+                <i class="fa fa-chevron-left"></i> Vim编辑器入门（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/09/2018_01_09/" rel="prev" title="Linux入门笔记（二）">
+                Linux入门笔记（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMjcwNy85MjY4"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="JoeyChan" />
+            
+              <p class="site-author-name" itemprop="name">JoeyChan</p>
+              <p class="site-description motion-element" itemprop="description">Life with beauty.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22605222&auto=0&height=66"></iframe>
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">JoeyChan</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+<script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+
+</body>
+</html>
