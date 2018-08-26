@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="#Q1题目描述：数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。输入描述：输入数据有多组，每组占一行，由两个整数n（n &amp;lt; 10000）和m(m &amp;lt; 1000)组成，n和m的含义如前所述。输出描述：对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。 #A1 12345678910111213141516#include &amp;lt;iostream">
+<meta name="description" content="#Q：题目描述：数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。输入描述：输入数据有多组，每组占一行，由两个整数n（n &amp;lt; 10000）和m(m &amp;lt; 1000)组成，n和m的含义如前所述。输出描述：对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。 #A： 12345678910111213141516#include &amp;lt;iostream">
 <meta name="keywords" content="编程实例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【牛客网】编程实例01">
 <meta property="og:url" content="https://joeychan0813.github.io/2018/08/21/2018_08_21/index.html">
 <meta property="og:site_name" content="JoeyChan">
-<meta property="og:description" content="#Q1题目描述：数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。输入描述：输入数据有多组，每组占一行，由两个整数n（n &amp;lt; 10000）和m(m &amp;lt; 1000)组成，n和m的含义如前所述。输出描述：对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。 #A1 12345678910111213141516#include &amp;lt;iostream">
+<meta property="og:description" content="#Q：题目描述：数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。输入描述：输入数据有多组，每组占一行，由两个整数n（n &amp;lt; 10000）和m(m &amp;lt; 1000)组成，n和m的含义如前所述。输出描述：对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。 #A： 12345678910111213141516#include &amp;lt;iostream">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-21T09:06:41.162Z">
+<meta property="og:updated_time" content="2018-08-23T07:07:24.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="【牛客网】编程实例01">
-<meta name="twitter:description" content="#Q1题目描述：数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。输入描述：输入数据有多组，每组占一行，由两个整数n（n &amp;lt; 10000）和m(m &amp;lt; 1000)组成，n和m的含义如前所述。输出描述：对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。 #A1 12345678910111213141516#include &amp;lt;iostream">
+<meta name="twitter:description" content="#Q：题目描述：数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。输入描述：输入数据有多组，每组占一行，由两个整数n（n &amp;lt; 10000）和m(m &amp;lt; 1000)组成，n和m的含义如前所述。输出描述：对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。 #A： 12345678910111213141516#include &amp;lt;iostream">
 
 
 
@@ -383,8 +383,8 @@
       
 
       
-        <p>#Q1<br><strong>题目描述：</strong>数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。<br><strong>输入描述：</strong>输入数据有多组，每组占一行，由两个整数n（n &lt; 10000）和m(m &lt; 1000)组成，n和m的含义如前所述。<br><strong>输出描述：</strong>对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。</p>
-<p>#A1</p>
+        <p>#Q：<br><strong>题目描述：</strong>数列的第一项为n，以后各项为前一项的平方根，求数列的前m项的和。<br><strong>输入描述：</strong>输入数据有多组，每组占一行，由两个整数n（n &lt; 10000）和m(m &lt; 1000)组成，n和m的含义如前所述。<br><strong>输出描述：</strong>对于每组输入数据，输出该数列的和，每个测试实例占一行，要求精度保留2位小数。</p>
+<p>#A：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &quot;math.h&quot;</span><br><span class="line">#include &lt;iomanip&gt;   //精度控制需要</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()&#123;</span><br><span class="line">    int m;</span><br><span class="line">    double n,count=0;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;        </span><br><span class="line">    for(int i=0;i&lt;m;i++)&#123;</span><br><span class="line">        count+=n;</span><br><span class="line">        n=sqrt(n);</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;fixed&lt;&lt;setprecision(2)&lt;&lt;count&lt;&lt;endl;   //精度控制</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -504,7 +504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">29</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
